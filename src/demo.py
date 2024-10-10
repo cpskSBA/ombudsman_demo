@@ -32,6 +32,7 @@ columns_to_display = ['Title', 'Link to Rule and Regulation', 'Effective Date']
 
 filtered_df = df_exploded[columns_to_display]
 
+
 # Remove NaN/None from the filter options but not from the dataset 
 agency_options = sorted(df_exploded['Agency'].dropna().unique())
 topics_options = sorted(df_exploded['topics'].dropna().unique())
