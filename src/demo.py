@@ -18,7 +18,9 @@ hide_streamlit_style = """
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-df= pd.read_csv('src\ombudsman_demo_dataset.csv').rename(columns={'title':'Title', 'html_url':'Link to Rule and Regulation','effective_date':'Effective Date'})
+#df= pd.read_csv(r'C:\Users\cpsolerkanchumarthy\U.S. Small Business Administration\Analysis and Evaluation Division (AED) - Documents\2. Analytics\Ombudsman\Code\ombudsman_streamlit_demo\src\ombudsman_demo_dataset.csv').rename(columns={'title':'Title', 'html_url':'Link to Rule and Regulation','effective_date':'Effective Date'})
+df= pd.read_csv(r'/src/ombudsman_demo_dataset.csv').rename(columns={'title':'Title', 'html_url':'Link to Rule and Regulation','effective_date':'Effective Date'})
+
 
 #Converting NAICS and topics to list in oprder to explode
 df['topics']= df['topics'].apply(lambda x: ast.literal_eval(x) if isinstance(x,str)else x)
