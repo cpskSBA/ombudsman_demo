@@ -84,11 +84,7 @@ if df_filtered.empty:
     st.warning("No compliance guides match the selected filters. Please adjust the filters.")
 else:
     # Display unique dataset based on title, link, and effective_date without index
-    st.dataframe(df_filtered[['Department','Title','Rule and Regulation Link','General Point of Contact Information']].drop_duplicates(subset=['Department','Title','Rule and Regulation Link','General Point of Contact Information']).reset_index(drop=True),hide_index= True)
-
-    st.data_editor(
-        df_filtered,
-        column_config={
+    st.dataframe(df_filtered[['Department','Title','Rule and Regulation Link','General Point of Contact Information']].drop_duplicates(subset=['Department','Title','Rule and Regulation Link','General Point of Contact Information']).reset_index(drop=True),hide_index= True,column_config={
             "Rule and Regulation Link": st.column_config.LinkColumn(
                 "Rule and Regulation Link",
                 display_text="Rule and Regulation"
@@ -97,8 +93,21 @@ else:
                 "General Point of Contact Information",
                 display_text="Contact Email"
             ),
-        },
-        hide_index=True
+        })
+
+    # st.data_editor(
+    #     df_filtered,
+    #     column_config={
+    #         "Rule and Regulation Link": st.column_config.LinkColumn(
+    #             "Rule and Regulation Link",
+    #             display_text="Rule and Regulation"
+    #         ),
+    #         "General Point of Contact Information": st.column_config.LinkColumn(
+    #             "General Point of Contact Information",
+    #             display_text="Contact Email"
+    #         ),
+    #     },
+    #     hide_index=True
     )
 
 
