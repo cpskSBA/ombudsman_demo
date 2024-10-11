@@ -71,7 +71,7 @@ def apply_filters(df, selected_topics, selected_naics, selected_department, sele
 # Sidebar filters with dynamic options based on current selections 
 
 selected_topics = st.sidebar.multiselect('Filter by Topics', options=sorted(df_exploded['topics'].dropna().unique()))
-selected_naics = st.sidebar.multiselect('Filter by NAICS', options=sorted(df_exploded['NAICS'].dropna().unique()))
+selected_naics = st.sidebar.multiselect('Filter by Industry (NAICS)', options=sorted(df_exploded['NAICS'].dropna().unique()))
 selected_department = st.sidebar.multiselect('Filter by Department', options=sorted(df_exploded['Department'].dropna().unique()))
 selected_agency = st.sidebar.multiselect('Filter by Agency', options=sorted(df_exploded['Agency'].dropna().unique()))
 selected_state = st.sidebar.multiselect('Filter by State (Default All States)', options=sorted(df_exploded['state_final'].dropna().unique()))
@@ -86,11 +86,21 @@ else:
     # Display unique dataset based on title, link, and effective_date without index
     st.dataframe(df_filtered[['Department','Title','Rule and Regulation Link','General Point of Contact Information']].drop_duplicates(subset=['Department','Title','Rule and Regulation Link','General Point of Contact Information']).reset_index(drop=True),hide_index= True)
 
-    # Convert the dataframe to HTML to display hyperlinks
-    df_filtered_html = df_filtered.to_html(escape=False, index=False)
+    st.data_editor(
+        df_filtered,
+        column_config={
+            "Rule and Regulation Link": st.column_config.LinkColumn(
+                "Rule and Regulation Link",
+                display_text="Rule and Regulation"
+            ),
+            "General Point of Contact Information": st.column_config.LinkColumn(
+                "General Point of Contact Information",
+                display_text="Contact Email"
+            ),
+        },
+        hide_index=True
+    )
 
-    # Display the dataframe with clickable links using st.markdown with HTML
-    #st.markdown(df_filtered_html, unsafe_allow_html=True)
 
 
 # Display the filtered dataframe
