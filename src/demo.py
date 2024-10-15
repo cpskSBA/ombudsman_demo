@@ -35,7 +35,7 @@ Whether you’re starting a new business or ensuring ongoing compliance, this ap
 
 
 #df= pd.read_csv(r'C:\Users\cpsolerkanchumarthy\U.S. Small Business Administration\Analysis and Evaluation Division (AED) - Documents\2. Analytics\Ombudsman\Code\ombudsman_streamlit_demo\src\ombudsman_demo_dataset.csv').rename(columns={'title':'Title', 'html_url':'Link to Rule and Regulation','effective_date':'Effective Date'})
-df= pd.read_csv('src/ombudsman_demo_dataset.csv').rename(columns={'title':'Title', 'html_url':'Link to Rule and Regulation','effective_date':'Effective Date'})
+df= pd.read_csv('src/ombudsman_demo_dataset.csv').rename(columns={'title':'Title', 'html_url':'Rule and Regulation Link','effective_date':'Effective Date'})
 
 
 #Converting NAICS and topics to list in oprder to explode
@@ -50,7 +50,7 @@ df_exploded['General Point of Contact Information'] = df_exploded['Department'].
 
 # Create a new column with hyperlinks to the rules and regulations 
 
-df_exploded['Rule and Regulation Link'] = df_exploded['Link to Rule and Regulation'].apply(lambda x: f'<a href="{x}" target="_blank">Rule and Regulation</a>')
+#df_exploded['Rule and Regulation Link'] = df_exploded['Link to Rule and Regulation'].apply(lambda x: f'<a href="{x}" target="_blank">Rule and Regulation</a>')
 
 # Function to filter based on selections 
 def apply_filters(df, selected_topics, selected_naics, selected_department, selected_agency, selected_state):
@@ -94,20 +94,6 @@ else:
                 display_text="Contact Email"
             ),
         })
-
-    # st.data_editor(
-    #     df_filtered,
-    #     column_config={
-    #         "Rule and Regulation Link": st.column_config.LinkColumn(
-    #             "Rule and Regulation Link",
-    #             display_text="Rule and Regulation"
-    #         ),
-    #         "General Point of Contact Information": st.column_config.LinkColumn(
-    #             "General Point of Contact Information",
-    #             display_text="Contact Email"
-    #         ),
-    #     },
-    #     hide_index=True)
 
 
 
